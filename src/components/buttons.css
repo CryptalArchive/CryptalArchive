@@ -1,0 +1,32 @@
+@media (min-width: 993px) {
+.navbtn {
+    background-color: #2C32B3;
+    font-size: 12px;
+    color: #6EFFB3 !important;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    text-align: center;
+    vertical-align: baseline;
+    padding-top: 25px !important;
+    margin: 0 5px 0 5px;
+    text-decoration: none;
+  }
+  .navbtn:hover {
+    background-color: #FF8CFA !important;
+    color: #270E6E !important;
+  }
+  .navbtn:active,
+  .navbtn.active {
+    background-color: #FFB3FC !important;
+    color: black !important;
+  }
+
+  .pageNav {
+    color: #54FFF5;
+  }
+
+  .pageNav:hover {
+    color: #FFB3FC;
+  }
+}
