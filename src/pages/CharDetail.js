@@ -1,12 +1,16 @@
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { Image } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import chars from "../chars";
 
 const CharDetail = () => {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    });
+    const location = useLocation();
+    useEffect(() => {
+        window.scrollTo({ top: 0 });
+        // scroll to the top of the browser window when changing route
+        // the window object is a normal DOM object and is safe to use in React.
+    }, [location]);
 
     const params = useParams();
     const character = chars.find(function (newArr) {
@@ -23,7 +27,7 @@ const CharDetail = () => {
     );
     return (
 
-        <div className="sec" style={{marginTop: "110px", color: "white"}}>
+        <div style={{marginTop: "110px", color: "white"}}>
            
         <div style={{border: "dashed 5px #6EFFB3", backgroundColor: "#27006670", marginRight: "10%", marginLeft: "10%", padding: "20px", borderRadius: "2%"}}>
             {/*Basic Info*/}
@@ -47,7 +51,6 @@ const CharDetail = () => {
         <Link className="backBtn" to="/characters">Back</Link>
         {charBtns}
         </div> 
-
         </div>
 
     )

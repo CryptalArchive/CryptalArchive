@@ -1,18 +1,22 @@
-import { useLayoutEffect, useState } from "react";
-import { Container, Image, Row, Col, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Container, Image, Row, Col, Button, Dropdown } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 import { Link, useHistory, useParams } from "react-router-dom";
 import chapters from "../chapters";
-import AnimatedPage from "../components/AnimatedPage";
 import NavButtons from "../components/NavButtons";
 
-function Archive(props) {
+function Archive() {
+    const location = useLocation();
+    useEffect(() => {
+    window.scrollTo({ top: 0 });
+    // scroll to the top of the browser window when changing route
+    // the window object is a normal DOM object and is safe to use in React.
+    }, [location]);
+
     // Allows the URL to be changed outside of link components.
     const history = useHistory();
-    
     // Makes page scroll to top when selecting a link. Less annoying when going from page to page.
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    });
+    
 
     // Grabs chapter and page from URL.
     const params = useParams();
@@ -30,6 +34,11 @@ function Archive(props) {
     const pages = [];
     
     const chapterButtons = [];
+
+    // Arrays that hold links for 
+    const mobileChapters = [];
+    const mobilePages = [];
+
     function changeChapter(chap) {
         setChapter(chap);
         setPgNum(1);
@@ -39,29 +48,34 @@ function Archive(props) {
     // Uses useHistory hook to change the URL according to the page being navigated to.
     function nextPage() {
         // If we're on the last page and want to go to the next chapter.
+        
         if ((pgNum === numOfPages) && ((chapter + 1 ) < numOfChapters)) {
    
-                setPgNum(1);
-                setChapter(chapter + 1);
-                history.push("/pages/" + (chapter + 1) + "/" + 1);
-            
+            setPgNum(1);
+            setChapter(chapter + 1);
+            history.push("/pages/" + (chapter + 1) + "/" + 1);
+
         }
         else {
             setPgNum(pgNum + 1);
             history.push("/pages/" + chapter + "/" + (pgNum+1));
         }
+
     }
     function prevPage() {
         // If on the first page but want to go back to the previous chapter.
+        
         if (pgNum === 1 && (chapter !== 0)) {
             let numPrevChapPages = chapters[chapter - 1].pages;
             setPgNum(numPrevChapPages);
             setChapter(chapter - 1);
             history.push("/pages/" + (chapter - 1) + "/" + numPrevChapPages);
+
         }
         else {
             setPgNum(pgNum - 1);
             history.push("/pages/" + chapter + "/" + (pgNum-1));
+
         }
     }
 
@@ -73,8 +87,10 @@ function Archive(props) {
 
     function lastPage() {
         let pagesInLatestChapter = chapters[numOfChapters - 1].pages;
+        
         setChapter(numOfChapters - 1);
         setPgNum(pagesInLatestChapter);
+        
         history.push("/pages/" + (numOfChapters - 1) + "/" + pagesInLatestChapter);
     }
     // Fills up the archive list with links that will change the comic page. 
@@ -82,35 +98,64 @@ function Archive(props) {
     for (let i = 1; i <= numOfPages; ++i) {
         pages.push(<Link onClick={() => setPgNum(i)} key={i} to={"/pages/" + chapter + "/" + i} className="comiclink">{i}<br></br></Link>  )
     }
+    for (let i = 1; i <= numOfPages; ++i) {
+        mobilePages.push(<Dropdown.Item onClick={() => setPgNum(i)} key={i}>{i}</Dropdown.Item>)
+    }
     // Creates buttons for each chapter.
     for (let i = 0; i < numOfChapters; ++i) {
         chapterButtons.push(<Button className="chapterBtn" onClick={() => changeChapter(i)}>{chapters[i].name}</Button>)
     }
-    
+    for (let i = 0; i < numOfChapters; ++i) {
+        mobileChapters.push(<Dropdown.Item onClick={() => changeChapter(i)}>{chapters[i].name}</Dropdown.Item>)
+    }
     return (
     
     <div>
     <Container fluid className="pageGrid">
-        <Row xs={2} lg={3} className="justify-content-md-center">
+        <Row xs={1} lg={3} className="justify-content-center">
             {/* Archive List */}
-            <Col lg={2}>
-                <div id="archive" xs className="pagelistblock">
-                <p> Archive </p>
-                {chapterButtons}
-                <hr></hr>
-                <br></br>
-                <p>Chapter {chapter}</p>
-                <p>{chapters[chapter].title}</p>
-                <br></br>
-                <hr></hr>
-                {pages}
+            <Col lg={2} >
+                <div id="archive" className="pagelistblock desktopNav">
+                    <p> Archive </p>
+                    {chapterButtons}
+                    <hr></hr>
+                    <br></br>
+                    <p>Chapter {chapter}</p>
+                    <p>{chapters[chapter].title}</p>
+                    <br></br>
+                    <hr></hr>
+                    {pages}
                 </div>
-            </Col>
 
+                <div className="mobileNav">
+                     
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="dark" >
+                            chapter
+                            </Dropdown.Toggle>
+                        
+                            <Dropdown.Menu variant="dark">
+                                {mobileChapters}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <Dropdown variant="dark">
+                            <Dropdown.Toggle variant="dark" menuVariant="dark">
+                            page
+                            </Dropdown.Toggle>
+                        
+                            <Dropdown.Menu variant="dark" style={{overflowY: "scroll", maxHeight: "300px", scrollbarColor: "black"}}>
+                                {mobilePages}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                </div>
+
+            </Col>
 
             {/* Comic Page */}
             <Col xs="auto" lg={6}> 
-                <p style={{color: "white", fontSize: "30px"}}>Chapter {chapter}, page {pgNum}</p>
+                <p style={{color: "white", fontSize: "25px"}}>Chapter {chapter}, page {pgNum}</p>
                 <NavButtons currentChapter={chapter} currentPage={pgNum} next={nextPage} prev={prevPage} first={firstPage} last={lastPage} />
                 <div className="pageblock"><Image onContextMenu={e => e.preventDefault()} fluid src={"/imgs/comic/chapter" + chapter + "/" + pgNum + ".jpg"} alt="pic"/></div>
                 <NavButtons currentChapter={chapter} currentPage={pgNum} next={nextPage} prev={prevPage} first={firstPage} last={lastPage} />

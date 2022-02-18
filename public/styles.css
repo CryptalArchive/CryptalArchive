@@ -11,11 +11,10 @@
 
 
 */
-
 .backBtn {
   text-decoration: none;
   text-align: center;
-  color: #54FFF5;
+  color: #54FFF5 !important;
   padding: 0 1.375rem;
   background-color: #2C32B3;
   border-radius: 0.75rem;
@@ -26,6 +25,7 @@
   background-color: #270066;
   color: #54FFF5;
 }
+
 .charCardGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
@@ -112,6 +112,7 @@
     background-attachment: fixed;
     background-size: 500px 300px;
     font-family: 'Bungee', cursive;
+    scrollbar-gutter: stable;
   }
   .footer {
     margin-top: 100px;
@@ -138,7 +139,28 @@
     height: 20px;
     margin-right: 1%;
   }
-  
+  .galbtn {
+    display: flex;
+    background-color: #2C32B3;
+    font-size: 15px;
+    color: #6EFFB3 !important;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    align-items: center;
+    padding-top: 25px !important;
+    margin: 0 5px 0 5px;
+    display: "inline-block";
+    transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+  .galbtn:hover {
+    background-color: #FF8CFA !important;
+    color: #270E6E !important;
+    cursor: pointer;
+  }
+
+
   a {
     color: #58437f;
   }
@@ -191,9 +213,58 @@
     .squidaboutpic .squidabouttext .melaboutpic .melabouttext {
       margin-bottom: 30px;
     }
+    .categoryButtons {
+      display: none;
+    }
+    .galleryPage {
+      margin-top: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .galleryBox {
+      width: 900; 
+    }
+    .mobileButtons {
+      display: show;
+      margin-bottom: 40px;
+    }
+    .mobileNav {
+      display: block;
+    }
+    .desktopNav {
+      display: none;
+    }
   }
   /* DESKTOP */
   @media (min-width: 993px) {
+    .mobileNav {
+      display: none;
+    }
+    .desktopNav {
+      display: block;
+    }
+    .mobileButtons {
+      display: none;
+    }
+    .galleryBox {
+      width: 70%; 
+      height: 90vh; 
+      overflow-y: scroll;
+    }
+    .galleryPage {
+      margin-top: 100px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .categoryButtons {
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      padding-top: 10px;
+    }
     .navbtn {
       background-color: #2C32B3;
       font-size: 12px;
@@ -210,6 +281,7 @@
     .navbtn:hover {
       background-color: #FF8CFA !important;
       color: #270E6E !important;
+      cursor: pointer;
     }
     .navbtn:active,
     .navbtn.active {
@@ -338,7 +410,7 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    margin-top: 150px;
+    margin-top: 100px;
   }
   
   .pagelistblock {

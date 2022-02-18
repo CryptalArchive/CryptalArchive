@@ -19,7 +19,7 @@ function Header() {
                     <img className="logobtn" src="/imgs/logo.png" alt=""></img>
                 </NavLink>
                 <LinkContainer activeClassName={classes.active} className="navbtn" exact to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
-                <LinkContainer activeClassName={classes.active} className="navbtn" to="/pages/0/1"><Nav.Link>Archive</Nav.Link></LinkContainer>
+                <LinkContainer activeClassName={classes.active} className="navbtn" to="/pages"><Nav.Link>Archive</Nav.Link></LinkContainer>
                 <LinkContainer activeClassName={classes.active} className="navbtn" to="/about"><Nav.Link>About</Nav.Link></LinkContainer>
                 <LinkContainer activeClassName={classes.active} className="navbtn" to="/characters"><Nav.Link>Chars</Nav.Link></LinkContainer>
                 <LinkContainer activeClassName={classes.active} className="navbtn" to="/gallery"><Nav.Link>Gallery</Nav.Link></LinkContainer>

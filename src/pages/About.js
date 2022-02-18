@@ -1,5 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import { Image } from 'react-bootstrap';
+import AnimatedPage from '../components/AnimatedPage';
 
 
 function About() {
@@ -7,6 +8,7 @@ function About() {
         window.scrollTo(0, 0)
     });
     return (
+    <AnimatedPage>
     <div className="sec" style={{marginTop: "100px"}}>
     <Image fluid src="/imgs/twoheadedanimal.png"></Image>
     <p className="aboutlogo">Twoheadedanimal</p>
@@ -27,6 +29,7 @@ function About() {
         His main focus right now is to raise money for his top surgery! He's been on HRT for over a year now and it's made him feel a lot more self confident</p></div>
     </div>
     </div>
+    </AnimatedPage>
 
     );
 }

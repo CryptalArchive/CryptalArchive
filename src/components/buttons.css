@@ -30,3 +30,33 @@
     color: #FFB3FC;
   }
 }
+
+.galleryButtons {
+  display: grid;
+  grid-column-gap: 50px;
+  grid-row-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+  justify-content: center;
+}
+
+.backBtn {
+  text-decoration: none;
+  text-align: center;
+  
+  color: #54FFF5 !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #2C32B3;
+  border-radius: 0.75rem;
+  transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.backBtn:hover {
+  background-color: #270066;
+  color: #54FFF5;
+}
+.backBtn:active,
+.backBtn.active {
+  background-color: #FFB3FC !important;
+    color: black !important;
+}
