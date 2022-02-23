@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Container, Image, Row, Col, Button, Dropdown  } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import chapters from "../chapters";
@@ -9,12 +9,9 @@ import { useLocation } from "react-router-dom";
 
 const Pages = () => {
     const location = useLocation();
-    useEffect(() => {
-    window.scrollTo({ top: 0 });
-    // scroll to the top of the browser window when changing route
-    // the window object is a normal DOM object and is safe to use in React.
-    }, [location]);
-    // Allows the URL to be changed outside of link components.
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
     const history = useHistory();
     
     // Makes page scroll to top when selecting a link. Less annoying when going from page to page.
@@ -127,29 +124,7 @@ const Pages = () => {
                     {pages}
                 </div>
                 {/* MOBILE NAVIGATION */}
-                <div className="mobileNav">
-                     
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                        <Dropdown>
-                            <Dropdown.Toggle variant="dark" >
-                            chapter
-                            </Dropdown.Toggle>
-                        
-                            <Dropdown.Menu variant="dark">
-                                {mobileChapters}
-                            </Dropdown.Menu>
-                        </Dropdown>
-                        <Dropdown variant="dark">
-                            <Dropdown.Toggle variant="dark" menuVariant="dark">
-                            page
-                            </Dropdown.Toggle>
-                        
-                            <Dropdown.Menu variant="dark" style={{overflowY: "scroll", maxHeight: "300px", scrollbarColor: "black"}}>
-                                {mobilePages}
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
-                </div>
+               
             </Col>
 
 

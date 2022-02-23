@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+import {Switch, Route, Redirect, useLocation} from "react-router-dom";
 import Archive from '../pages/Archive';
 import Header from './Header';
 import Footer from './Footer';
 import About from "../pages/About";
-import {Switch, Route, Redirect} from "react-router-dom";
 import Characters from '../pages/Characters';
 import CharDetail from '../pages/CharDetail';
 import Home from '../pages/Home';
-import { useLocation } from 'react-router-dom';
 import Pages from '../pages/Pages';
 import Gallery from '../pages/Gallery';
 function App() {

@@ -22,6 +22,7 @@ const Gallery = () => {
   const galleryCat = params.galleryCategory;
   const [gal, setGal] = useState(gallery.filter(item => item.category === galleryCat));
   const [subCat, setSubCat] = useState("all");
+  
   function handleChange(newsubcat) {
     if (newsubcat === "all") {
       setGal(gallery.filter(item => item.category === galleryCat))

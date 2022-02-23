@@ -6,7 +6,6 @@
     "npm": "7.22.0",
     "node": "14.17.6"
   },
-  "homepage": "https://cryptalarchive.github.io/cryptalarchive",
   "dependencies": {
     "-": "^0.0.1",
     "@emotion/react": "^11.7.1",

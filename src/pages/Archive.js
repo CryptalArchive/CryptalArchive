@@ -126,31 +126,6 @@ function Archive() {
                     <hr></hr>
                     {pages}
                 </div>
-
-                <div className="mobileNav">
-                     
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                        <Dropdown>
-                            <Dropdown.Toggle variant="dark" >
-                            chapter
-                            </Dropdown.Toggle>
-                        
-                            <Dropdown.Menu variant="dark">
-                                {mobileChapters}
-                            </Dropdown.Menu>
-                        </Dropdown>
-                        <Dropdown variant="dark">
-                            <Dropdown.Toggle variant="dark" menuVariant="dark">
-                            page
-                            </Dropdown.Toggle>
-                        
-                            <Dropdown.Menu variant="dark" style={{overflowY: "scroll", maxHeight: "300px", scrollbarColor: "black"}}>
-                                {mobilePages}
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
-                </div>
-
             </Col>
 
             {/* Comic Page */}
@@ -161,9 +136,6 @@ function Archive() {
                 <NavButtons currentChapter={chapter} currentPage={pgNum} next={nextPage} prev={prevPage} first={firstPage} last={lastPage} />
             </Col>
             
-        </Row>
-        <Row className="mobileList" style={{display: "none"}}>
-        
         </Row>
     </Container>
     </div>
