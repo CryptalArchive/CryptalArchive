@@ -7,7 +7,7 @@ const chapters = [
 {
     name: "Ch. 1",
     title: "Contingency Plan Pt. 1",
-    pages: 2
+    pages: 3
 }
 ];
 export default chapters;
