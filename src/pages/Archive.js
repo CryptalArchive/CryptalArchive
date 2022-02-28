@@ -112,7 +112,7 @@ function Archive() {
     
     <div>
     <Container fluid className="pageGrid">
-        <Row xs={1} lg={3} className="justify-content-center">
+        <Row xs={1} lg={3} className="left">
             {/* Archive List */}
             <Col lg={2} >
                 <div id="archive" className="pagelistblock desktopNav">
@@ -127,7 +127,9 @@ function Archive() {
                     {pages}
                 </div>
             </Col>
-
+            <Col lg={2}>
+            
+            </Col>
             {/* Comic Page */}
             <Col xs="auto" lg={6}> 
                 <p style={{color: "white", fontSize: "25px"}}>Chapter {chapter}, page {pgNum}</p>

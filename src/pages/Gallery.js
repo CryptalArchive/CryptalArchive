@@ -9,7 +9,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import AnimatedPage from '../components/AnimatedPage';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, Image } from 'react-bootstrap';
+import { Card, CardMedia, Modal, Fade, Typography, Backdrop } from '@mui/material';
 
 const Gallery = () => {
   const location = useLocation();
@@ -21,8 +22,23 @@ const Gallery = () => {
   const params = useParams();
   const galleryCat = params.galleryCategory;
   const [gal, setGal] = useState(gallery.filter(item => item.category === galleryCat));
+  const [image, setImage] = useState("");
   const [subCat, setSubCat] = useState("all");
-  
+  const [open, setOpen] = React.useState(false);
+  const style = {
+    position: 'absolute',
+    textAlign: 'center',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: "80vw",
+    maxHeight: "80vh",
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const handleClose = () => setOpen(false);
   function handleChange(newsubcat) {
     if (newsubcat === "all") {
       setGal(gallery.filter(item => item.category === galleryCat))
@@ -32,7 +48,10 @@ const Gallery = () => {
       
     }
     setSubCat(newsubcat);
-  
+  }
+  function handleOpen(img) {
+    setOpen(true);
+    setImage(img);
   }
 
 
@@ -72,20 +91,44 @@ const Gallery = () => {
           </Dropdown.Menu>
         </Dropdown>
       </div>
-      <Box className="galleryBox">
-        <ImageList variant="masonry" cols={2} gap={8}>
-            {gal.map((item) => (
-              <ImageListItem key={item.img}>
-                <img
-                  src={`${item.path}?w=900&fit=crop&auto=format`}
-                  srcSet={`${item.path}?w=900&fit=crop&auto=format&dpr=2 2x`}
-                  alt={item.title}
-                  loading="lazy"
-                />
-              </ImageListItem>
-            ))}
-        </ImageList>
-      </Box>
+      <div className="galleryGrid">
+        {gal.map((item) => (
+          <Card sx={{ maxWidth: 300, margin: "25px", border: "solid white 5px" }}>
+          <CardMedia 
+          className="galleryImage"
+          onClick={() => handleOpen(item)}
+          fluid
+          component="img"
+          height="240"
+          image={item.path}
+          alt={item.title}
+          />
+          </Card>
+        ))}      
+        <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+          <Typography>
+            Artwork by ArtistHere.
+            </Typography>  
+          <Image style={{maxWidth: "70vw", maxHeight: "70vh",}} src={image.path} alt={image.title}></Image>
+            
+          </Box>
+        </Fade>
+      </Modal>
+      </div>
+
+
       
       </div>
       </AnimatedPage>

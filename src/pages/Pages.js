@@ -108,7 +108,7 @@ const Pages = () => {
         <div style={{marginTop: "100px", textAlign: "center"}}>
         <AnimatedPage>
         <Container fluid className="pageGrid">
-        <Row xs={1} lg={3} className="justify-content-center">
+        <Row xs={1} lg={3} className="left">
             {/* Archive List */}
             <Col lg={2} >
                 {/* DESKTOP NAVIGATION */}
@@ -126,7 +126,9 @@ const Pages = () => {
                 {/* MOBILE NAVIGATION */}
                
             </Col>
-
+            <Col lg={2}>
+            
+            </Col>
 
             {/* Comic Page */}
             <Col xs="auto" lg={6}> 
